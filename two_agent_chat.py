@@ -33,7 +33,7 @@ chat_result = student_agent.initiate_chat(
     summary_method="reflection_with_llm",
     max_turns=2,
 )
-
+# attention: the summary_method is reflection_with_llm, which means the agent will use LLM to summarize the conversation. You can also use "last_msg" to get the last message as summary.
 print(ConversableAgent.DEFAULT_SUMMARY_PROMPT)
 print(chat_result.summary)
 
