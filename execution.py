@@ -54,4 +54,33 @@ chat = user_agent.initiate_chat(
     message="write python code 'Hello World'.",
 )
 
-temp_dir.cleanup()
+temp_dir.cleanup() # clean up the tempfile
+
+# use docker to execute code
+# strongly suggest to use this way. YOU NEED TO INSTALL DOCKER FIRST
+
+
+
+
+# a simple way to execute code
+# autogen has already provided you with a simple way to execute code using docker.
+from autogen import AssistantAgent
+from autogen import UserProxyAgent
+
+executor_agent = UserProxyAgent(
+    "Executor_Agent",
+    llm_config=False,
+    code_execution_config={"executor": executor},
+    human_input_mode="ALWAYS",
+)
+
+code_agent = AssistantAgent(
+    "code_agent",
+    llm_config={"config_list": config_list},
+    human_input_mode="NEVER",
+)
+
+chat_message = executor_agent.initiate_chat(
+    code_agent,
+    message="write python code 'Hello World'.",
+)
