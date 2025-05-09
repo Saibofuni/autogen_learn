@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 
 
 
-
+# Function to write the article to a file
 def write_article(path: str, content: str) -> str:
     with open(path, "w", encoding="utf-8") as file:
         file.write(content)
@@ -16,13 +16,13 @@ def write_article(path: str, content: str) -> str:
     return "Article written successfully."
 
 
-
+# Function to generate the format
 def get_format(format_path: str) -> str:
     with open(format_path, "r", encoding="utf-8") as file:
         return file.read()
 
 
-
+# Function to fetch the content
 def get_contents(path: str) -> str:
     with open(path, "r", encoding="utf-8") as file:
         lines = file.readlines()
@@ -46,14 +46,14 @@ def get_contents(path: str) -> str:
     return "".join(content)
 
 
-
+# Function to write the content to a markdown file
 def write_to_markdown(path: str, content: str) -> str:
     with open(path, "a", encoding="utf-8") as file:
         file.write(content+"\n\n")
     return "Content written to markdown file successfully."
 
 
-
+# Function to check if Pandoc is installed
 def check_pandoc_installed():
     try:
         subprocess.run(["pandoc", "--version"], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -62,7 +62,7 @@ def check_pandoc_installed():
         return False
 
 
-
+# Function to convert Markdown to Word document
 def markdown_to_docx(input_file, output_folder):
     if not input_file.lower().endswith(('.md', '.markdown')):
         print("Please provide a valid Markdown file (ending with .md or .markdown)")

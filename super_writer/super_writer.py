@@ -66,6 +66,7 @@ writer_details = ConversableAgent(
     system_message="You are a content writer. Your task is to generate and enrich content based on user requests and it will be added to the markdown file, so use markdown format. You need to follow the format strictly. Do not add anything else.",
 )
 
+# Function to generate the format
 def format_generate(title: str, request: str) -> str:
     format_chat = user_proxy.initiate_chat(
         format_writer,
@@ -79,6 +80,7 @@ def format_generate(title: str, request: str) -> str:
     print(f"Format generated and saved to format.md")
     return f"Generated format for title: {title} with request: {request}"
 
+# Function to enrich the content
 def enrich_content(content: str) -> str:
     enrich_chat = user_proxy.initiate_chat(
         writer_details,
@@ -125,6 +127,7 @@ if __name__ == "__main__":
     content = chat.summary
     support.write_article(text_path, content)
 
+    # fetch the content from the text file and enrich it
     empty = False
     while not empty:
         content = support.get_contents(text_path)
@@ -134,13 +137,14 @@ if __name__ == "__main__":
             enriched_content = enrich_content(content)
             support.write_to_markdown(path, enriched_content)
 
-
+    # Check if the file exists before attempting to remove it
     if os.path.exists("./format.md"):
         os.remove("./format.md")
         print(f"File ./format.md removed.")
     else:
         print(f"File ./format.md does not exist.")
 
+    # Check if the file exists before attempting to remove it
     if os.path.exists(text_path):
         os.remove(text_path)
         print(f"File {text_path} removed.")
