@@ -95,7 +95,16 @@ if __name__ == "__main__":
     final_path = input("Please enter the final path of the article(docx): ")
     final_path = final_path.replace("\\", "/")
 
-    format_generate(title, request)
+    format_path = input("Please enter the path of the format file(if there is none, please enter 'none'): ")
+    if format_path != "none":
+        format_path = format_path.replace("\\", "/")
+        with open(format_path, "r", encoding="utf-8") as file:
+            format_ = file.read()
+        with open("./format.md", "w", encoding="utf-8") as file:
+            file.write(format_)
+        print(f"Format loaded from {format_path}")
+    else:
+        format_generate(title, request)
 
     text_path = f"./{title}.txt"
     path = f"./{title}.md"
