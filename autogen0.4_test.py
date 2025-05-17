@@ -20,7 +20,6 @@ from autogen_ext.models.openai import OpenAIChatCompletionClient
 model_client = OpenAIChatCompletionClient(model="gpt-4o", api_key="sk-xxx")
 '''
 # use the following line if you want to use other API
-'''
 from autogen_ext.models.openai import OpenAIChatCompletionClient
 custom_model_client = OpenAIChatCompletionClient(
     model="deepseek-chat",
@@ -34,7 +33,7 @@ custom_model_client = OpenAIChatCompletionClient(
         "structured_output": True,
     },
 )
-'''
+
 
 # Define a simple function tool that the agent can use.
 # For this example, we use a fake weather tool for demonstration purposes.
@@ -47,8 +46,8 @@ async def get_weather(city: str) -> str:
 # The system message instructs the agent via natural language.
 agent = AssistantAgent(
     name="weather_agent",
-    model_client=model_client,
-    # model_client=custom_model_client,
+    # model_client=model_client,
+    model_client=custom_model_client,
     tools=[get_weather],
     system_message="You are a helpful assistant.",
     reflect_on_tool_use=True,
