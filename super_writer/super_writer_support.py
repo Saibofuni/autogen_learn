@@ -31,7 +31,7 @@ def get_contents(path: str) -> str:
     capture = False
     remaining_lines = []
     for line in lines:
-        if "###" in line and "####" not in line:
+        if "##" in line and "###" not in line:
             if capture:  # Stop capturing when the next "###" is found
                 remaining_lines.append(line)  # Keep the current "###" for the next read
                 break

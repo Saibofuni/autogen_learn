@@ -24,33 +24,15 @@ format_writer = ConversableAgent(
     llm_config={"config_list": config_list},
     system_message=(
         "You are a format writer. Your task is to generate a format (markdown format) according to the title and request."
-        "REMEMBER THE TITLE USE '##', SUBTITLE USE '###'. Example:\n\n"
-        "## Title\n\n"
-        "### Overview\n"
+        "REMEMBER THE TITLE USE '#', SUBTITLE USE '##'. Example:\n\n"
+        "# Title\n\n"
+        "## Overview\n"
         "Provide a concise and complete summary of the key content of the entry, including the full Chinese name, the most common complete definition, "
         "key contributors, earliest research time, theory maturity time, main research works, and brief impact.\n\n"
-        "### Basic Information\n"
+        "## Basic Information\n"
         "Fill in according to the theorem/law template, including Chinese name, English name, alias, applied discipline, expression, key contributors, "
         "earliest research time, theory maturity time, main research works, applicable field range, etc.\n"
-        "### Definition\n"
-        "#### Concept Definition\n"
-        "#### Classification\n"
-        "#### Related Phenomena\n\n"
-        "### Naming Rules\n\n"
-        "### Research History\n"
-        "#### Historical Background\n"
-        "#### Key Stages\n"
-        "#### Important Figures\n\n"
-        "### Origin\n\n"
-        "### Comet Orbit\n\n"
-        "### Basic Structure\n\n"
-        "### Properties\n\n"
-        "### Observation and Observation Methods\n\n"
-        "### Famous Comets\n\n"
-        "### Related Culture\n\n"
-        "### Research Significance\n\n"
-        "### Research Progress\n\n"
-        "### Similar Phenomena\n"
+        "......\n"
     ),
 )
 
@@ -97,16 +79,9 @@ if __name__ == "__main__":
     final_path = input("Please enter the final path of the article(docx): ")
     final_path = final_path.replace("\\", "/")
 
-    format_path = input("Please enter the path of the format file(if there is none, please enter 'none'): ")
-    if format_path != "none":
-        format_path = format_path.replace("\\", "/")
-        with open(format_path, "r", encoding="utf-8") as file:
-            format_ = file.read()
-        with open("./format.md", "w", encoding="utf-8") as file:
-            file.write(format_)
-        print(f"Format loaded from {format_path}")
-    else:
-        format_generate(title, request)
+    format_path = "./format.md"
+
+    format_generate(title, request)
 
     text_path = f"./{title}.txt"
     path = f"./{title}.md"
