@@ -116,6 +116,7 @@ asyncio.run(model_client.close())
 # ---------------------------------------------------------------------------
 
 # ---------------------------- Use McpWorkbench ------------------------------
+# something goes wrong with mcp-server-fetch, so we comment it out for now.
 # Get the fetch tool from mcp-server-fetch.
 # fetch_mcp_server = StdioServerParams(command="uvx", args=["mcp-server-fetch"])
 
