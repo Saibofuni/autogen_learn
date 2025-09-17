@@ -1,15 +1,21 @@
 from autogen import ConversableAgent, GroupChatManager, GroupChat
 import os
 import tempfile
+import json
 
-api_key = os.environ.get("4o_api")
-base_url = os.environ.get("4o_endpoint")
+
+api_config_path = os.environ.get("api_configs")
+with open(api_config_path, "r", encoding="utf-8") as f:
+    api_configs = json.load(f)
+    api_key = api_configs['azure-4o']['api_key']
+    endpoint = api_configs['azure-4o']['base_url']
+    version = api_configs['azure-4o']['api_version']
 config_list = {
     "model": "gpt-4o",
     "api_key": api_key,
     "api_type": "azure",
-    "base_url": base_url,
-    "api_version": "2024-12-01-preview",
+    "base_url": endpoint,
+    "api_version": version,
 }
 
 # The Number Agent always returns the same numbers.

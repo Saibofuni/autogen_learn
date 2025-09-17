@@ -3,15 +3,24 @@ from autogen_agentchat.ui import Console
 from autogen_ext.models.openai import AzureOpenAIChatCompletionClient
 import asyncio
 import os
+import json
 
 # Define a model client. You can use other model client that implements
 # the `ChatCompletionClient` interface.
+api_config_path = os.environ.get("api_configs")
+with open(api_config_path, "r", encoding="utf-8") as f:
+    api_configs = json.load(f)
+    api_key = api_configs['azure-4o']['api_key']
+    endpoint = api_configs['azure-4o']['base_url']
+    version = api_configs['azure-4o']['api_version']
+
+
 model_client = AzureOpenAIChatCompletionClient(
     azure_deployment="gpt-4o",
-    azure_endpoint=os.environ.get("4o_endpoint"),
+    azure_endpoint=endpoint,
     model="gpt-4o",
-    api_version="2024-12-01-preview",
-    api_key=os.environ.get("4o_api"),
+    api_version=version,
+    api_key=api_key,
 )
 
 # use the following line if you want to use OpenAI API instead of Azure OpenAI

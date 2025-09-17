@@ -13,12 +13,18 @@ import PIL
 import requests
 from autogen_agentchat.messages import MultiModalMessage
 from autogen_core import Image
+import json
 
 # ATTENTION: deepseek DO NOT support mutilmodal message yet.
+api_config_path = os.environ.get("api_configs")
+with open(api_config_path, "r", encoding="utf-8") as f:
+    api_configs = json.load(f)
+    api_key = api_configs['deepseek']['api_key']
+
 custom_model_client = OpenAIChatCompletionClient(
     model="deepseek-chat",
     base_url="https://api.deepseek.com",
-    api_key=os.environ.get("deepseek_api"),
+    api_key=api_key,
     model_info={
         "vision": True,
         "function_calling": True,

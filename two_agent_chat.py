@@ -4,16 +4,25 @@
 import os
 from autogen import ConversableAgent
 import pprint
+import json
 
 # 获取 API 密钥，以及 Azure OpenAI 的 endpoint
+api_config_path = os.environ.get("api_configs")
+with open(api_config_path, "r", encoding="utf-8") as f:
+    api_configs = json.load(f)
+    api_key = api_configs['azure-4o']['api_key']
+    endpoint = api_configs['azure-4o']['base_url']
+    version = api_configs['azure-4o']['api_version']
+
+
 api_key = os.getenv("4o_api")
 base_url = os.getenv("4o_endpoint")
 config_list = {
     "model": "gpt-4o",
     "api_key": api_key,
     "api_type": "azure",
-    "base_url": base_url,
-    "api_version": "2024-12-01-preview",
+    "base_url": endpoint,
+    "api_version": version,
 }
 
 student_agent = ConversableAgent(
